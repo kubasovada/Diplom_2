@@ -30,7 +30,7 @@ public class CreateUserTest {
         user = UserGenerator.getRandomDefaultUser();
 
         ValidatableResponse response = userClient.create(user);
-        check.createdSuccessfullySC200(response);
+        check.createdOrLoggedInSuccessfullySC200(response);
 
         accessToken = response.extract().path("accessToken");
     }
@@ -43,7 +43,7 @@ public class CreateUserTest {
         accessToken = response.extract().path("accessToken");
 
         response = userClient.create(user);
-        check.notCreatedSC403(response);
+        check.notCreatedExistedUserSC403(response);
     }
 
 }

@@ -7,7 +7,8 @@ import static io.restassured.http.ContentType.JSON;
 
 public class UserClient extends Client {
 
-    public static final String REGISTER = "register";
+    private static final String REGISTER = "register";
+    private static final String LOGIN = "login";
 
     public ValidatableResponse create(User user) {
         return spec()
@@ -24,6 +25,14 @@ public class UserClient extends Client {
                 .baseUri(BASE_URI)
                 .basePath(BASE_PATH + "user")
                 .delete()
+                .then().log().all();
+    }
+
+    public ValidatableResponse login(Credentials creds) {
+        return spec()
+                .body(creds)
+                .when()
+                .post(LOGIN)
                 .then().log().all();
     }
 }

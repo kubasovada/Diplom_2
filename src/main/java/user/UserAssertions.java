@@ -7,7 +7,7 @@ import java.net.HttpURLConnection;
 import static org.hamcrest.CoreMatchers.is;
 
 public class UserAssertions {
-    public void createdSuccessfullySC200(ValidatableResponse response) {
+    public void createdOrLoggedInSuccessfullySC200(ValidatableResponse response) {
         response
                 .assertThat()
                 .statusCode(HttpURLConnection.HTTP_OK)
@@ -21,7 +21,7 @@ public class UserAssertions {
                 .body("success", is(true));
     }
 
-    public  void notCreatedSC403(ValidatableResponse response) {
+    public  void notCreatedExistedUserSC403(ValidatableResponse response) {
          response
                 .assertThat()
                 .statusCode(HttpURLConnection.HTTP_FORBIDDEN)
@@ -33,5 +33,12 @@ public class UserAssertions {
                 .assertThat()
                 .statusCode(HttpURLConnection.HTTP_FORBIDDEN)
                 .body("message", is("Email, password and name are required fields"));
+    }
+
+    public  void notLoggedInWithoutRequiredFieldsSC401(ValidatableResponse response) {
+        response
+                .assertThat()
+                .statusCode(HttpURLConnection.HTTP_UNAUTHORIZED)
+                .body("message", is("email or password are incorrect"));
     }
 }
