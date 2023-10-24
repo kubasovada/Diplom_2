@@ -9,6 +9,8 @@ public class UserClient extends Client {
 
     private static final String REGISTER = "register";
     private static final String LOGIN = "login";
+    private static final String USER = "user";
+
 
     public ValidatableResponse create(User user) {
         return spec()
@@ -19,12 +21,9 @@ public class UserClient extends Client {
     }
 
     public ValidatableResponse delete(String accessToken) {
-        return given().log().all()
-                .contentType(JSON)
+        return spec()
                 .header("Authorization", accessToken)
-                .baseUri(BASE_URI)
-                .basePath(BASE_PATH + "user")
-                .delete()
+                .delete(USER)
                 .then().log().all();
     }
 
@@ -33,6 +32,23 @@ public class UserClient extends Client {
                 .body(creds)
                 .when()
                 .post(LOGIN)
+                .then().log().all();
+    }
+
+    public ValidatableResponse changeUser(User user, String accessToken) {
+         return spec()
+                .header("Authorization", accessToken)
+                .body(user)
+                .when()
+                .patch(USER)
+                .then().log().all();
+    }
+
+    public ValidatableResponse changeUserWithoutToken (User user) {
+        return spec()
+                .body(user)
+                .when()
+                .patch(USER)
                 .then().log().all();
     }
 }

@@ -40,7 +40,7 @@ public class LoginUserTest {
 
     @Test
     public void loginUserWithNullPasswordReturns401() {
-        creds = new Credentials("someemail@ya.ru", null);
+        creds = new Credentials("somemail@ya.ru", null);
         ValidatableResponse response = userClient.login(creds);
         check.notLoggedInWithoutRequiredFieldsSC401(response);
     }

@@ -41,4 +41,11 @@ public class UserAssertions {
                 .statusCode(HttpURLConnection.HTTP_UNAUTHORIZED)
                 .body("message", is("email or password are incorrect"));
     }
+
+    public void notChangedUserWithoutTokenSC401(ValidatableResponse response) {
+        response
+                .assertThat()
+                .statusCode(HttpURLConnection.HTTP_UNAUTHORIZED)
+                .body("success", is(false), "message", is("You should be authorised"));
+    }
 }
