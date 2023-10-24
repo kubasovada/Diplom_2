@@ -1,3 +1,4 @@
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +19,7 @@ public class CreateUserWithNullArgsTest {
     }
 
     @Test
+    @DisplayName("unsuccessful create user without password")
     public void userCantBeCreatedWithoutPassword() {
         user = new User("some@ya.ru", null, "Marvin");
 
@@ -26,6 +28,7 @@ public class CreateUserWithNullArgsTest {
     }
 
     @Test
+    @DisplayName("unsuccessful create user without email")
     public void userCantBeCreatedWithoutEmail() {
         user = new User(null, "P@ssw0rd", "Marvin");
 
@@ -34,6 +37,7 @@ public class CreateUserWithNullArgsTest {
     }
 
     @Test
+    @DisplayName("unsuccessful create user without name")
     public void userCantBeCreatedWithoutName() {
         user = new User("some@ya.ru", "P@ssw0rd", null);
 

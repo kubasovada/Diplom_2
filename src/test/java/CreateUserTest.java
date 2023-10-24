@@ -1,3 +1,4 @@
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Before;
@@ -26,6 +27,7 @@ public class CreateUserTest {
 
 
     @Test
+    @DisplayName("create user with valid user data")
     public void userCanBeCreatedTest() {
         user = UserGenerator.getRandomDefaultUser();
 
@@ -37,6 +39,7 @@ public class CreateUserTest {
 
 
     @Test
+    @DisplayName("unsuccessful create user with existed user data")
     public void userCantBeCreatedWithExistingUserTest() {
         user = UserGenerator.getRandomDefaultUser();
         ValidatableResponse response = userClient.create(user);

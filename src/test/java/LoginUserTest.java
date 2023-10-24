@@ -1,3 +1,4 @@
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,6 +18,7 @@ public class LoginUserTest {
     }
 
     @Test
+    @DisplayName("login user with correct credentials")
     public void loginUserWithCorrectCredsReturnsSC200() {
         user = UserGenerator.getRandomDefaultUser();
         creds = Credentials.from(user);
@@ -32,6 +34,7 @@ public class LoginUserTest {
     }
 
     @Test
+    @DisplayName("login user with null email")
     public void loginUserWithNullEmailReturns401() {
         creds = new Credentials(null, "P@ssw0rd");
         ValidatableResponse response = userClient.login(creds);
@@ -39,6 +42,7 @@ public class LoginUserTest {
     }
 
     @Test
+    @DisplayName("login user with null password")
     public void loginUserWithNullPasswordReturns401() {
         creds = new Credentials("somemail@ya.ru", null);
         ValidatableResponse response = userClient.login(creds);
