@@ -7,7 +7,7 @@ import static io.restassured.http.ContentType.JSON;
 
 public class Client {
     protected static final String BASE_URI = "https://stellarburgers.nomoreparties.site";
-    protected static final String BASE_PATH = "/api/auth/";
+    protected static final String BASE_PATH = "/api";
 
     public RequestSpecification spec() {
         return given().log().all()
